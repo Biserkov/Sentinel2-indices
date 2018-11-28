@@ -1,10 +1,6 @@
-
 dates = ["2017-05-19", "2017-06-28", "2017-09-16", "2017-10-26"]
 base = "E:\\VB\Vitosha\\"
 target = base + "Target_area.shp"
-
-
-
 
 formulas = {
     "NDVI": "($B08 - $B04) / ($B08 + $B04)",
@@ -34,14 +30,11 @@ formulas = {
 }
 selected_indexes = formulas.keys()
 
-
-
-
 import string
 import os
 import arcpy
 from time import gmtime, strftime
-print(strftime("%H:%M:%S", gmtime()))
+print(strftime("%H:%M:%S", gmtime()) + " start processing")
 #arcpy.CheckOutExtension('Spatial')
 from arcpy.sa import *
 rasters = base + "Rasters\\"
@@ -50,7 +43,6 @@ if not os.path.exists(rasters):
 Bands_folder = base + "Bands\\"        
 if not os.path.exists(Bands_folder):
 		os.makedirs(Bands_folder)
-
 
 maxes = {
     "adj10": "($B10_max / $B10)",    
@@ -114,4 +106,4 @@ for d in dates:
         out = rasters + d + "\\" + f + " " + d + ".tif"
         res = eval(expr, globals(), locals()).save(out)
 
-    print(strftime("%H:%M:%S", gmtime()))
+    print(strftime("%H:%M:%S", gmtime()) + " done processing " + d)
