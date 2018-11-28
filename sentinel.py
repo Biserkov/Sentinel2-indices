@@ -69,7 +69,7 @@ for f, defn in formulas.items():
 s2 = os.listdir(base + "S2")
 
 bands_by_res = {
-    "10": ["B02", "B03", "B04", "B08"],
+    "10": ["B02", "B03", "B04", "B08", "TCI"],
     "20": ["B05", "B06", "B07", "B8A", "B11", "B12"],
     "60": ["B01", "B09"]
 }
