@@ -67,8 +67,10 @@ bands_by_res = {
 }
 
 for d in dates:
-    prefix = "S2A_MSIL2A_" + d.replace("-", "")
-    a = [item for item in s2 if item.startswith(prefix)][0]
+    date_no_dash = d.replace("-", "")
+    prefix_2A = "S2A_MSIL2A_" + date_no_dash
+    prefix_2B = "S2B_MSIL2A_" + date_no_dash
+    a = [item for item in s2 if (item.startswith(prefix_2A) or item.startswith(prefix_2B)) ][0]
     b = base + "S2\\"+a+r"\GRANULE"
     c = os.listdir(b)[0]  
     bands = {}
