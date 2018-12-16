@@ -5,6 +5,7 @@ target = base + "Target_area.shp"
 formulas = {
     "NDVI": "($B08 - $B04) / ($B08 + $B04)",
     "Red edge NDVI": "($B08 - $B06) / ($B08 + $B06)",
+    "GNDVI": "($B8A - $B03) / ($B8A + $B03)",
     "NDVI-GREEN": "$B03 * ($B08 - $B04) / ($B08 + $B04)",
     "NDVI705": "($B06 - $B05) / ($B06 + $B05)",
     "mNDVI705": "($B06 - $B05) / ($B06 + $B05 - (2 * $B01))",
@@ -12,6 +13,7 @@ formulas = {
     "CRI2": "1 / $adj02 - 1 / $adj05",
     "MSI":  "$B11 / $B08",
     #"BAI": "1 / ( (0,1 - $adj04) ** 2 + (0.06 - $adj08) ** 2)",
+    "EVI": "2.5 * ($B8A - $B4)/(1 + $B8A + 6 * $B4 - 7.5 * $B2)",
     "SAVI": "1.5 * ($adj08 - $adj04) / ($adj08 + $adj04 + 0.5)",
     "MCARI": "1 - 0.2 * ($adj05 - $adj03) / ($adj05 - $adj04)",
     "NBR": "($B08 - $B12) / ($B08 + $B12)",
