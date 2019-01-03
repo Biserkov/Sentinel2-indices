@@ -46,11 +46,10 @@ if not os.path.exists(Bands_folder):
 		os.makedirs(Bands_folder)
 
 maxes = {
-    "adj10": "($B10_max / $B10)",    
-    "adj11": "($B11_max / $B11)",
-    "adj12": "($B12_max / $B12)",
-    "adj8A": "($B8A_max / $B8A)",
-    "adj10": "($B10_max / $B10)"
+    "adj10": "($B10 / $B10_max)",    
+    "adj11": "($B11 / $B11_max)",
+    "adj12": "($B12 / $B12_max)",
+    "adj8A": "($B8A / $B8A_max)",
     }
 
 for i in range(1, 10):
