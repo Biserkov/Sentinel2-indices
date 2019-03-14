@@ -1,45 +1,52 @@
-dates = ["2017-05-19", "2017-06-28", "2017-09-16", "2017-10-26"]
+dates = ["2018-09-01", "2018-05-29", "2018-06-08", "2018-08-07", "2018-10-06", "2018-10-16"]
 base = "E:\\VB\Vitosha\\"
-target = base + "Target_area.shp"
+target = base + "Target_area_10km2.shp"
 
 formulas = {
-    # 10m
+    #  # 10m
     "NDVI": "($B08 - $B04) / ($B08 + $B04)",
     "NDVI-GREEN": "$B03 * ($B08 - $B04) / ($B08 + $B04)",
     "CRI1": "1 / $adj02 - 1 / $adj03",
-    "PSSR": "$B08 / $B04",
+    "PSSRa": "$B08 / $B04",
+    "PSSRc": "$B08 / $B02",
     "SAVI": "1.5 * ($B08 - $B04) / ($B08 + $B04 + 0.5)",
     "NDWI": "($B03 - $B08) / ($B03 + $B08)",
+    "MSAVI": "(2 * $B08 + 1 - SquareRoot((2 * $B08 + 1) ** 2 - 8 * ($B08 - $B04) ))/2",
     #"BAI": "1 / ( (0,1 - $adj04) ** 2 + (0.06 - $adj08) ** 2)",
 
-    ## 20m
-    "Red edge NDVI": "($B08 - $B06) / ($B08 + $B06)",
-    "GNDVI": "($B8A - $B03) / ($B8A + $B03)",
-    "NDVI705": "($B06 - $B05) / ($B06 + $B05)",  
-    "CRI2": "1 / $adj02 - 1 / $adj05",
-    "MSI":  "$B11 / $B08",
-    "EVI": "2.5 * ($B8A - $B04)/(1 + $B8A + 6 * $B04 - 7.5 * $B02)",
-    "MCARI": "1 - 0.2 * ($adj05 - $adj03) / ($adj05 - $adj04)",
-    "NBR": "($B08 - $B12) / ($B08 + $B12)",
-    "S2REP": "705 + 35 * (0.5 * ($B07 + $B04) - $B05) / ($B06 - $B05)",
-    "PSRI": "($B04 - $B02) / $B05",
-    "MNDWI": "($B03 - $B11) / ($B03 + $B11)",
-    "RE-NDWI": "($B03 - $B05) / ($B03 + $B05)",
-    "NDII": "($B08 - $B11) / ($B08 + $B11)",
-    "NDBI": "($B11 - $B08) / ($B11 + $B08)",
-    "MTCI": "($B06 - $B05) / ($B05 - $B04)",
+    #  # 20m
+    # "Red edge NDVI": "($B08 - $B06) / ($B08 + $B06)",
+    # "GNDVI": "($B8A - $B03) / ($B8A + $B03)",
+    # "NDVI705": "($B06 - $B05) / ($B06 + $B05)",  
+    # "CRI2": "1 / $adj02 - 1 / $adj05",
+    # "MSI":  "$B11 / $B08",
+    # "EVI": "2.5 * ($B8A - $B04)/(1 + $B8A + 6 * $B04 - 7.5 * $B02)",
+    # "MCARI": "1 - 0.2 * ($adj05 - $adj03) / ($adj05 - $adj04)",
+    # "NBR": "($B08 - $B12) / ($B08 + $B12)",
+    # "S2REP": "705 + 35 * (0.5 * ($B07 + $B04) - $B05) / ($B06 - $B05)",
+    # "PSRI": "($B04 - $B02) / $B05",
+    # "MNDWI": "($B03 - $B11) / ($B03 + $B11)",
+    # "RE-NDWI": "($B03 - $B05) / ($B03 + $B05)",
+    # "NDII": "($B08 - $B11) / ($B08 + $B11)",
+    # "NDBI": "($B11 - $B08) / ($B11 + $B08)",
+    # "MTCI": "($B06 - $B05) / ($B05 - $B04)",
 
-    # 60m
-    "mSR705": "($B06 - $B01) / ($B05 - $B01)",
-    "mNDVI705": "($B06 - $B05) / ($B06 + $B05 - (2 * $B01))",
-    "SIPI": "($B08 - $B01) / ($B08 - $B04)",
+    #  # 60m
+    # "mSR705": "($B06 - $B01) / ($B05 - $B01)",
+    # "mNDVI705": "($B06 - $B05) / ($B06 + $B05 - (2 * $B01))",
+    # "SIPI": "($B08 - $B01) / ($B08 - $B04)",
 }
+
+
+### DON'T EDIT BELOW
+
 selected_indexes = formulas.keys()
 
 import string
 import os
 import arcpy
 from time import gmtime, strftime
+arcpy.env.pyramid = "PYRAMIDS -1 CUBIC LZ77 NO_SKIP"
 print(strftime("%H:%M:%S", gmtime()) + " start processing")
 #arcpy.CheckOutExtension('Spatial')
 from arcpy.sa import *
